@@ -20,30 +20,44 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="保持积极与热爱">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Myblog">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="字符串的匹配问题字符串的储存R-way trie 也叫字典树 字符串的查找用这个是最优的,时间最优,但是占用大量的空间(为什么?因为reference太多了, 每个单独的字符都是一个Node,而每个Node又保存一个字符的指针,内存占用真的很大!)  红黑树没有运用到字符串的性质,还是将字符串当成一个对象,用key值找到后再将Object和String进行比较,所以需要L(字符串本身查看是否匹配的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串的匹配问题">
+<meta property="og:url" content="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Myblog">
-<meta property="og:description" content="保持积极与热爱">
+<meta property="og:description" content="字符串的匹配问题字符串的储存R-way trie 也叫字典树 字符串的查找用这个是最优的,时间最优,但是占用大量的空间(为什么?因为reference太多了, 每个单独的字符都是一个Node,而每个Node又保存一个字符的指针,内存占用真的很大!)  红黑树没有运用到字符串的性质,还是将字符串当成一个对象,用key值找到后再将Object和String进行比较,所以需要L(字符串本身查看是否匹配的">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/trieProperties.png">
+<meta property="og:image" content="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/summary1.png">
+<meta property="og:image" content="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/charBaseOP.png">
+<meta property="og:image" content="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/longestPrefix.png">
+<meta property="og:image" content="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/longestPrefix2.png">
+<meta property="og:image" content="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/equalMethod.png">
+<meta property="og:image" content="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/KMP.png">
+<meta property="og:image" content="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/Construct.png">
+<meta property="og:image" content="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/time.png">
+<meta property="article:published_time" content="2023-12-05T08:56:47.000Z">
+<meta property="article:modified_time" content="2023-12-05T09:11:59.776Z">
 <meta property="article:author" content="Winds">
+<meta property="article:tag" content="KMP">
+<meta property="article:tag" content="tries">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/trieProperties.png">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Myblog</title>
+  <title>字符串的匹配问题 | Myblog</title>
   
 
 
@@ -156,9 +170,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -174,10 +189,9 @@
       <meta itemprop="name" content="Myblog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">字符串的匹配问题</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          字符串的匹配问题
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -210,7 +224,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="字符串的匹配问题"><a href="#字符串的匹配问题" class="headerlink" title="字符串的匹配问题"></a>字符串的匹配问题</h2><h4 id="字符串的储存"><a href="#字符串的储存" class="headerlink" title="字符串的储存"></a>字符串的储存</h4><h3 id="R-way-trie-也叫字典树"><a href="#R-way-trie-也叫字典树" class="headerlink" title="R-way trie 也叫字典树"></a>R-way trie 也叫字典树</h3><ul>
+        <h2 id="字符串的匹配问题"><a href="#字符串的匹配问题" class="headerlink" title="字符串的匹配问题"></a>字符串的匹配问题</h2><h4 id="字符串的储存"><a href="#字符串的储存" class="headerlink" title="字符串的储存"></a>字符串的储存</h4><h3 id="R-way-trie-也叫字典树"><a href="#R-way-trie-也叫字典树" class="headerlink" title="R-way trie 也叫字典树"></a>R-way trie 也叫字典树</h3><ul>
 <li>字符串的查找用这个是最优的,时间最优,但是占用大量的空间(为什么?因为reference太多了, 每个单独的字符都是一个Node,而每个Node又保存一个字符的指针,内存占用真的很大!)</li>
 </ul>
 <p><img src="/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/trieProperties.png" alt="图片" title="trieProperties"><br>红黑树没有运用到字符串的性质,还是将字符串当成一个对象,用key值找到后再将Object和String进行比较,所以需要L(字符串本身查看是否匹配的时间 + clg^2N,红黑树寻找的时间)</p>
@@ -303,217 +317,34 @@
 </li>
 </ul>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/KMP/" rel="tag"># KMP</a>
+              <a href="/tags/tries/" rel="tag"># tries</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/Pchy.png">
-      <meta itemprop="name" content="Winds">
-      <meta itemprop="description" content="保持积极与热爱">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Myblog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" class="post-title-link" itemprop="url">数据结构与算法期末复习</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-05 15:50:47 / 修改时间：16:18:58" itemprop="dateCreated datePublished" datetime="2023-12-05T15:50:47+08:00">2023-12-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="数据结构与算法期末复习"><a href="#数据结构与算法期末复习" class="headerlink" title="数据结构与算法期末复习"></a>数据结构与算法期末复习</h1><h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h2><h3 id="Quick-Find"><a href="#Quick-Find" class="headerlink" title="Quick - Find"></a>Quick - Find</h3><h3 id="Quick-union"><a href="#Quick-union" class="headerlink" title="Quick - union"></a>Quick - union</h3><ul>
-<li>会出现Tall tree , tall tree 导致find和union的操作都需要N的时间复杂度</li>
-</ul>
-<h3 id="improvement1"><a href="#improvement1" class="headerlink" title="improvement1"></a>improvement1</h3><ul>
-<li>增加空间复杂度, 为树根增加一个weight变量(maintain a extra arr size[]) 让高的树在高处 , 低的树在低处</li>
-</ul>
-<h3 id="improvement2"><a href="#improvement2" class="headerlink" title="improvement2"></a>improvement2</h3><ul>
-<li>Path compression</li>
-<li><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/pathCompression.png" alt="图片" title="pathCompression"></li>
-</ul>
-<p>在调用root函数的时候, 每次遍历一个结点都将自己的父节点设置为自己的父节点的父节点</p>
-<p><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/flat.png" alt="图片" title="flat"></p>
-<p>可以让整棵树变得f</p>
-<h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><ul>
-<li>连通子图(针对于无向图)<ul>
-<li>任意两个顶点都有路径</li>
-</ul>
-</li>
-<li>强连通(针对于有向图)<ul>
-<li>既有从i到j,也有从j到i</li>
-</ul>
-</li>
-<li>极大连通子图<ul>
-<li>就是component, 只有极大才可以说是component</li>
-</ul>
-</li>
-</ul>
-<p><strong>生成树</strong></p>
-<p>生成树是极小连通子图</p>
-<p>回忆一下树的性质: n个顶点n-1条边</p>
-<h3 id="图的表示方法"><a href="#图的表示方法" class="headerlink" title="图的表示方法"></a>图的表示方法</h3><h4 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h4><ul>
-<li>不适用于分散的数据</li>
-<li>对于有向图求入度和出度, 出度对应的行相加,出度对应的列相加</li>
-</ul>
-<h4 id="加权的邻接矩阵"><a href="#加权的邻接矩阵" class="headerlink" title="加权的邻接矩阵"></a>加权的邻接矩阵</h4><ul>
-<li>没有边权重就是正无穷</li>
-</ul>
-<h4 id="数组链表"><a href="#数组链表" class="headerlink" title="数组链表"></a>数组链表</h4><h2 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h2><ul>
-<li>因为传统的二叉树高度还是会比较高,有没有什么办法可以让树高进一步变小呢?<ul>
-<li>采用m叉查找树!</li>
-<li>但是m叉查找树又不一定会每个结点都满…所以B树规定了每个结点中关键字的个数不得少于某个值</li>
-</ul>
-</li>
-</ul>
-<p><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/Bproperties.png" alt="图片" title="Bproperties"></p>
-<ul>
-<li>注意第二点,这是为了每个子树的高度都相同,如果一个结点只有一棵子树的话,他的高度就肯定不一样<br><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/Bproperties2.png" alt="图片" title="Bproperties2"></li>
-</ul>
-<h4 id="B树的高度"><a href="#B树的高度" class="headerlink" title="B树的高度"></a>B树的高度</h4><p><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/minH.png" alt="图片" title="minH"></p>
-<p><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/maxH.png" alt="图片" title="maxH"></p>
-<ul>
-<li>这里的是叶子结点的个数,而不是关键字的个数</li>
-<li>n个关键字的B树必定有n+1个叶子结点,这个很重要!!! (-INF,+INF)的区间被n个关键字分成了n+1个区间</li>
-</ul>
-<p><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/maxH2.png" alt="图片" title="maxH2"></p>
-<ul>
-<li>这是另一种推导思路</li>
-</ul>
-<h3 id="重点-B树的插入和删除"><a href="#重点-B树的插入和删除" class="headerlink" title="重点!! B树的插入和删除"></a>重点!! B树的插入和删除</h3><p><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/summary.png" alt="图片" title="summary"><br>总结就是: 非终端的都可以转化为对终端结点的删除操作,对于终端结点的删除操作分为几个步骤,如果左右兄弟够借就操作前驱和前驱的前驱或者后继和后继的后继,如果不够借就进行合并</p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" rel="prev" title="数据结构与算法期末复习">
+      <i class="fa fa-chevron-left"></i> 数据结构与算法期末复习
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/Pchy.png">
-      <meta itemprop="name" content="Winds">
-      <meta itemprop="description" content="保持积极与热爱">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Myblog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/11/29/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-11-29 18:15:48" itemprop="dateCreated datePublished" datetime="2023-11-29T18:15:48+08:00">2023-11-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -566,6 +397,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">字符串的匹配问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%82%A8%E5%AD%98"><span class="nav-number">1.0.1.</span> <span class="nav-text">字符串的储存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R-way-trie-%E4%B9%9F%E5%8F%AB%E5%AD%97%E5%85%B8%E6%A0%91"><span class="nav-number">1.1.</span> <span class="nav-text">R-way trie 也叫字典树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Challenge"><span class="nav-number">1.2.</span> <span class="nav-text">Challenge!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tenary-Search-Tree"><span class="nav-number">1.3.</span> <span class="nav-text">Tenary Search Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Character-Based-Operation"><span class="nav-number">1.5.</span> <span class="nav-text">Character Based Operation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Longest-prefix"><span class="nav-number">1.5.1.</span> <span class="nav-text">Longest prefix</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99%E5%AE%9A%E6%96%87%E6%9C%AC%E5%AF%B9%E6%8C%87%E5%AE%9A%E5%AD%97%E4%B8%B2%E6%90%9C%E7%B4%A2"><span class="nav-number">1.6.</span> <span class="nav-text">给定文本对指定字串搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Brute-Force"><span class="nav-number">1.6.1.</span> <span class="nav-text">Brute-Force</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BruteForce%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E7%AD%89%E4%BB%B7%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="nav-number">1.6.2.</span> <span class="nav-text">BruteForce的另一种等价实现方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">1.6.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KMP%E7%AE%97%E6%B3%95"><span class="nav-number">1.7.</span> <span class="nav-text">KMP算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5"><span class="nav-number">1.7.1.</span> <span class="nav-text">引入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%9B%B0%E9%9A%BE%E7%9A%84%E7%82%B9-KMP%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E7%9A%84%E6%9E%84%E5%BB%BA"><span class="nav-number">1.8.</span> <span class="nav-text">最困难的点 - &gt; KMP有限状态机的构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">1.9.</span> <span class="nav-text">时间复杂度分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boggle-Game"><span class="nav-number">1.10.</span> <span class="nav-text">Boggle Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q"><span class="nav-number">1.11.</span> <span class="nav-text">Q</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%8A%80%E8%83%BD"><span class="nav-number">1.12.</span> <span class="nav-text">掌握的技能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.13.</span> <span class="nav-text">性能瓶颈的问题.</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
