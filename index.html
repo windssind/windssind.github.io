@@ -20,13 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="保持积极与热爱">
+  <meta name="description" content="This is my blog.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Myblog">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="Myblog">
-<meta property="og:description" content="保持积极与热爱">
+<meta property="og:description" content="This is my blog.">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-05T09:26:42.533Z">
+<meta property="article:modified_time" content="2023-12-05T09:26:42.533Z">
 <meta property="article:author" content="Winds">
 <meta name="twitter:card" content="summary">
 
@@ -37,13 +39,14 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
+    isHome : false,
     isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Myblog</title>
+  <title> | Myblog
+</title>
   
 
 
@@ -155,367 +158,46 @@
       <div class="main-inner">
         <div class="content-wrap">
           
+  
+  
 
-          <div class="content index posts-expand">
+          <div class="content page posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/Pchy.png">
-      <meta itemprop="name" content="Winds">
-      <meta itemprop="description" content="保持积极与热爱">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Myblog">
-    </span>
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">字符串的匹配问题</a>
-        </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
+<h1 class="post-title" itemprop="name headline">
+</h1>
 
-              <time title="创建时间：2023-12-05 16:56:47 / 修改时间：17:11:59" itemprop="dateCreated datePublished" datetime="2023-12-05T16:56:47+08:00">2023-12-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithms/" itemprop="url" rel="index"><span itemprop="name">Algorithms</span></a>
-                </span>
-            </span>
+<div class="post-meta">
+  
 
-          
+</div>
 
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
-          <h2 id="字符串的匹配问题"><a href="#字符串的匹配问题" class="headerlink" title="字符串的匹配问题"></a>字符串的匹配问题</h2><h4 id="字符串的储存"><a href="#字符串的储存" class="headerlink" title="字符串的储存"></a>字符串的储存</h4><h3 id="R-way-trie-也叫字典树"><a href="#R-way-trie-也叫字典树" class="headerlink" title="R-way trie 也叫字典树"></a>R-way trie 也叫字典树</h3><ul>
-<li>字符串的查找用这个是最优的,时间最优,但是占用大量的空间(为什么?因为reference太多了, 每个单独的字符都是一个Node,而每个Node又保存一个字符的指针,内存占用真的很大!)</li>
-</ul>
-<p><img src="/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/trieProperties.png" alt="图片" title="trieProperties"><br>红黑树没有运用到字符串的性质,还是将字符串当成一个对象,用key值找到后再将Object和String进行比较,所以需要L(字符串本身查看是否匹配的时间 + clg^2N,红黑树寻找的时间)</p>
-<p><strong>可以应用于拼写检查</strong></p>
-<h3 id="Challenge"><a href="#Challenge" class="headerlink" title="Challenge!"></a>Challenge!</h3><p>每个结点可以使用26指针,占用了太多的空间,使用了太多的memory, 想一下,如果是65536的unicode,直接爆炸!</p>
-<h3 id="Tenary-Search-Tree"><a href="#Tenary-Search-Tree" class="headerlink" title="Tenary Search Tree"></a>Tenary Search Tree</h3><ul>
-<li>解决了空间的问题,每个结点此时只需要 存储三个指针,left,mid和right</li>
-</ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/summary1.png" alt="图片" title="summary1"></p>
-<p>主要就是hash需要检查要搜寻的key的全部</p>
-<p>OrderSymbol Op是什么东西呢?</p>
-<p><strong>因此,存储string的symbol table可以用上面两种数据结构进行存储</strong></p>
-<h3 id="Character-Based-Operation"><a href="#Character-Based-Operation" class="headerlink" title="Character Based Operation"></a>Character Based Operation</h3><p><img src="/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/charBaseOP.png" alt="图片" title="charBaseOP"></p>
-<h4 id="Longest-prefix"><a href="#Longest-prefix" class="headerlink" title="Longest prefix"></a>Longest prefix</h4><p><img src="/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/longestPrefix.png" alt="图片" title="longestPrefix"></p>
-<ul>
-<li>基本思想,如果找到一个新的key,就将此时的length更新为新的key的length,否则继续遍历,直到找到了不匹配的字符或者遍历结束(这种情况下的遍历结束也就意味着最长prefix就是自身)<br><img src="/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/longestPrefix2.png" alt="图片" title="longestPrefix2"></li>
-</ul>
-<h3 id="给定文本对指定字串搜索"><a href="#给定文本对指定字串搜索" class="headerlink" title="给定文本对指定字串搜索"></a>给定文本对指定字串搜索</h3><h4 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute-Force"></a>Brute-Force</h4><ul>
-<li>每次搜索失败都要完全回退,造成一共需要MN次compares</li>
-</ul>
-<h4 id="BruteForce的另一种等价实现方法"><a href="#BruteForce的另一种等价实现方法" class="headerlink" title="BruteForce的另一种等价实现方法"></a>BruteForce的另一种等价实现方法</h4><p><img src="/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/equalMethod.png" alt="图片" title="equalMethod"></p>
-<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><p>关键在于减少回退的次数,失败之后的惩罚.而这种的回退惩罚很大,那有什么办法可以不回退呢?</p>
-<h3 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h3><h4 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h4><p><img src="/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/KMP.png" alt="图片" title="KMP"></p>
-<p>这是一个全知全能的有限状态机,上帝视角创建出来的</p>
-<h3 id="最困难的点-KMP有限状态机的构建"><a href="#最困难的点-KMP有限状态机的构建" class="headerlink" title="最困难的点 - &gt; KMP有限状态机的构建"></a>最困难的点 - &gt; KMP有限状态机的构建</h3><p>参考文献:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38003454/article/details/108396994">KMP的DFA 实现_kmp算法 dfa-CSDN博客</a></p>
-<p>本质:利用了txt的最长后缀和pat的最长前缀相同</p>
-<p><img src="/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/Construct.png" alt="图片" title="Construct"></p>
-<p>关键要理解: 索引为j时匹配失败,那就要回到重启状态 <strong>并且构建是仅仅通过pat字符串进行构建的</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dfa[c][j] = dfa [c][x]</span><br></pre></td></tr></table></figure>
-
-<p>重启状态:匹配失败时,根据txt的最长后缀和pat的最长前缀相等的原则构建的(例如最长前缀长度为m,那么重启状态就是m+1)</p>
-<p>但是重启状态应该怎么求呢? (关键点,难点)</p>
-<p><strong>我们在计算状态j时,已经是知道了本次的回退状态是什么的(因为回退状态仅由前面的已经匹配的j-1决定) 那么我们就可以把pat[j]处的字符当作j状态时的输入,这样算出来的就是前面j+1的时候的重启状态</strong></p>
-<p>所以可以写出</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X = dfa[pat[j]][X]</span><br></pre></td></tr></table></figure>
-
-<p><strong>这里隐含了一个层层嵌套的关系,相当于每次都隐式为每一列(单个j)暂时性维护了一个重启状态X</strong></p>
-<p><strong>动态规划,每次遍历一个列的时候,前面列的状态都已经维护完毕了,而重启状态的长度必然是小于等于当前列的,所以只需要在之前的列中找就行了</strong></p>
-<h3 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h3><p><img src="/2023/12/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/time.png" alt="图片" title="time"></p>
-<h3 id="Boggle-Game"><a href="#Boggle-Game" class="headerlink" title="Boggle Game"></a>Boggle Game</h3><ul>
-<li>先通过dictionary构建出字典树,为了节省空间使用Teneary树 <ul>
-<li>字典树是为了String 和value的映射关系.这里只是存储String,并没有存储value的需求.所以直接用Set<String>就行了</li>
-<li>上面的也是错误的,单纯的Set<Stirng>只能满足存储String,但无法支持prefix等操作</li>
-</ul>
-</li>
-<li>采用深度遍历? 我的想法是用深度遍历构建出所有可能字符串,然后一一查找匹配(但是时间复杂度太高了)<ul>
-<li>如何优化呢?<ul>
-<li>采取深度遍历,每次深度遍历的时候都要查看字典树中是否有String的前缀和当前遍历的子串相同.如果不相同就直接不要遍历了</li>
-<li>所以还是要构建能够支持查找是否有共同前缀的字典树呀.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h3><ol>
-<li><p>如何防止生成一个字符串的时候遍历到同一个位置的字符呢?</p>
-<p>解决方案1:可以传进一个已经遍历的位置的row,col的二元组进去,但是这要额外耗费大量空间(因为每个String都要维护一个,每次调用一个DFS都代表一个新的可能的String,这样意味着一个新的hasVisited数组)</p>
-</li>
-</ol>
-<h3 id="掌握的技能"><a href="#掌握的技能" class="headerlink" title="掌握的技能"></a>掌握的技能</h3><ul>
-<li>认识到当String作为key值的时候,可以采用字典树作为存储结构,这种结构的搜索比Tree更快</li>
-<li>掌握字典树的对应API</li>
-<li>自己学会写R-way字典树</li>
-</ul>
-<h3 id="性能瓶颈的问题"><a href="#性能瓶颈的问题" class="headerlink" title="性能瓶颈的问题."></a>性能瓶颈的问题.</h3><ul>
-<li><p>如何防止遍历到同一个字符?</p>
-<ul>
-<li><p>我的方法是为每一个DFS创建一个新的marked数组,但是这样会造成大量的空间浪费,同时生成数组也需要时间</p>
-</li>
-<li><p>很简单的一个解决方法,对所有的子孩字结束DFS之后,再将当前的marked变为false</p>
-</li>
-<li><pre><code class="java">marked[cur_Row][cur_Col] = true;
-        for (int i = cur_Row - 1; i &lt; cur_Row + 2; ++i) &#123;
-            for (int j = cur_Col - 1; j &lt; cur_Col + 2; ++j) &#123;
-                if (i == cur_Row &amp;&amp; j == cur_Col) continue;
-                if (!validate(i, j, board.rows(), board.cols())) continue;
-                if (marked[i][j]) continue;
-                String Adder = String.valueOf(board.getLetter(i, j));
-                if (Adder.equals(&quot;Q&quot;)) Adder = &quot;QU&quot;;
-                DFS_Words(words, prefix + Adder, board,
-                          marked, i, j);
-            &#125;
-        &#125;
-        marked[cur_Row][cur_Col] = false;
-</code></pre>
-</li>
-<li><p>每次dfs之后都把自身遍历过的信息清楚,自身遍历过的信息只有自己的孩子们知道</p>
-</li>
-</ul>
-</li>
+      
+      
+      <div class="post-body">
+          <ul>
+<li>This is my blog.</li>
 </ul>
 
+      </div>
+      
+      
       
     </div>
+    
 
     
     
     
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/Pchy.png">
-      <meta itemprop="name" content="Winds">
-      <meta itemprop="description" content="保持积极与热爱">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Myblog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" class="post-title-link" itemprop="url">数据结构与算法期末复习</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-05 15:50:47 / 修改时间：16:18:58" itemprop="dateCreated datePublished" datetime="2023-12-05T15:50:47+08:00">2023-12-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="数据结构与算法期末复习"><a href="#数据结构与算法期末复习" class="headerlink" title="数据结构与算法期末复习"></a>数据结构与算法期末复习</h1><h2 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h2><h3 id="Quick-Find"><a href="#Quick-Find" class="headerlink" title="Quick - Find"></a>Quick - Find</h3><h3 id="Quick-union"><a href="#Quick-union" class="headerlink" title="Quick - union"></a>Quick - union</h3><ul>
-<li>会出现Tall tree , tall tree 导致find和union的操作都需要N的时间复杂度</li>
-</ul>
-<h3 id="improvement1"><a href="#improvement1" class="headerlink" title="improvement1"></a>improvement1</h3><ul>
-<li>增加空间复杂度, 为树根增加一个weight变量(maintain a extra arr size[]) 让高的树在高处 , 低的树在低处</li>
-</ul>
-<h3 id="improvement2"><a href="#improvement2" class="headerlink" title="improvement2"></a>improvement2</h3><ul>
-<li>Path compression</li>
-<li><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/pathCompression.png" alt="图片" title="pathCompression"></li>
-</ul>
-<p>在调用root函数的时候, 每次遍历一个结点都将自己的父节点设置为自己的父节点的父节点</p>
-<p><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/flat.png" alt="图片" title="flat"></p>
-<p>可以让整棵树变得f</p>
-<h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><ul>
-<li>连通子图(针对于无向图)<ul>
-<li>任意两个顶点都有路径</li>
-</ul>
-</li>
-<li>强连通(针对于有向图)<ul>
-<li>既有从i到j,也有从j到i</li>
-</ul>
-</li>
-<li>极大连通子图<ul>
-<li>就是component, 只有极大才可以说是component</li>
-</ul>
-</li>
-</ul>
-<p><strong>生成树</strong></p>
-<p>生成树是极小连通子图</p>
-<p>回忆一下树的性质: n个顶点n-1条边</p>
-<h3 id="图的表示方法"><a href="#图的表示方法" class="headerlink" title="图的表示方法"></a>图的表示方法</h3><h4 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h4><ul>
-<li>不适用于分散的数据</li>
-<li>对于有向图求入度和出度, 出度对应的行相加,出度对应的列相加</li>
-</ul>
-<h4 id="加权的邻接矩阵"><a href="#加权的邻接矩阵" class="headerlink" title="加权的邻接矩阵"></a>加权的邻接矩阵</h4><ul>
-<li>没有边权重就是正无穷</li>
-</ul>
-<h4 id="数组链表"><a href="#数组链表" class="headerlink" title="数组链表"></a>数组链表</h4><h2 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h2><ul>
-<li>因为传统的二叉树高度还是会比较高,有没有什么办法可以让树高进一步变小呢?<ul>
-<li>采用m叉查找树!</li>
-<li>但是m叉查找树又不一定会每个结点都满…所以B树规定了每个结点中关键字的个数不得少于某个值</li>
-</ul>
-</li>
-</ul>
-<p><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/Bproperties.png" alt="图片" title="Bproperties"></p>
-<ul>
-<li>注意第二点,这是为了每个子树的高度都相同,如果一个结点只有一棵子树的话,他的高度就肯定不一样<br><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/Bproperties2.png" alt="图片" title="Bproperties2"></li>
-</ul>
-<h4 id="B树的高度"><a href="#B树的高度" class="headerlink" title="B树的高度"></a>B树的高度</h4><p><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/minH.png" alt="图片" title="minH"></p>
-<p><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/maxH.png" alt="图片" title="maxH"></p>
-<ul>
-<li>这里的是叶子结点的个数,而不是关键字的个数</li>
-<li>n个关键字的B树必定有n+1个叶子结点,这个很重要!!! (-INF,+INF)的区间被n个关键字分成了n+1个区间</li>
-</ul>
-<p><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/maxH2.png" alt="图片" title="maxH2"></p>
-<ul>
-<li>这是另一种推导思路</li>
-</ul>
-<h3 id="重点-B树的插入和删除"><a href="#重点-B树的插入和删除" class="headerlink" title="重点!! B树的插入和删除"></a>重点!! B树的插入和删除</h3><p><img src="/2023/12/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/summary.png" alt="图片" title="summary"><br>总结就是: 非终端的都可以转化为对终端结点的删除操作,对于终端结点的删除操作分为几个步骤,如果左右兄弟够借就操作前驱和前驱的前驱或者后继和后继的后继,如果不够借就进行合并</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/Pchy.png">
-      <meta itemprop="name" content="Winds">
-      <meta itemprop="description" content="保持积极与热爱">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Myblog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/11/29/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-11-29 18:15:48" itemprop="dateCreated datePublished" datetime="2023-11-29T18:15:48+08:00">2023-11-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-
 
 
           </div>
